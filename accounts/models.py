@@ -7,6 +7,7 @@ from accounts.manager import UserManager
 class User(AbstractUser):
     email = models.EmailField(unique=True, null=False, blank=False)
     bio = models.TextField(max_length=500, blank=True, null=True)
+    avatar = models.ImageField(upload_to="images/avatars", null=False, blank=False, default="images/avatars/default.svg")
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
