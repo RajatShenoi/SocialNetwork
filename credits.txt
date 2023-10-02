@@ -1,0 +1,2 @@
+Create a credits section where we will give attribution to whatever required.
+- Favicon: https://www.flaticon.com/free-icon/social-network_4344722?term=social+media&page=1&position=16&origin=tag&related_id=4344722
