@@ -33,7 +33,18 @@
         <li><a>Item 3</a></li>
       </ul>
     </div>
-    <div class="navbar-end">
-      <a class="btn">Button</a>
+    <div class="menu menu-horizontal navbar-end px-1">
+      {% if request.user.is_authenticated %}
+        <li tabindex="0">
+          <details>
+            <summary>My Account</summary>
+            <ul class="p-2">
+              <li><a href="{% url 'accounts-logout' %}">Logout</a></li>
+            </ul>
+          </details>
+        </li>
+      {% else %}
+        <a class="btn" href="{% url 'accounts-register' %}">Log In</a>
+      {% endif %}
     </div>
   </div>

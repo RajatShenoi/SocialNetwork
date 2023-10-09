@@ -1,0 +1,11 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h3>Create a new account</h3>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-accent" type="submit" value="Create">
+    </form>
+{% endblock %}
