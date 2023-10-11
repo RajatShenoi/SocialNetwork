@@ -1,2 +1,4 @@
-django
-Pillow
+asgiref==3.7.2
+Django==4.2.6
+Pillow==10.0.1
+sqlparse==0.4.4
