@@ -1,9 +1,12 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 
 from accounts.forms import MyUserCreationForm
 from accounts.models import User
+
+from verify_email.email_handler import send_verification_email
 
 # Create your views here.
 def home(request):
@@ -15,11 +18,13 @@ def registerUser(request):
     if request.method == 'POST':
         form = MyUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
+            try:
+                user = send_verification_email(request, form)
+            except:
+                return HttpResponse("An error occured, kindly contact the admin")
             user.username = user.username.lower()
             user.email = user.email.lower()
             user.save()
-            login(request, user)
             return redirect('accounts-home')
 
     return render(request, 'accounts/register.html', {
