@@ -1,7 +1,8 @@
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
 
 from accounts.forms import MyUserCreationForm
 from accounts.models import User
@@ -9,8 +10,29 @@ from accounts.models import User
 from verify_email.email_handler import send_verification_email
 
 # Create your views here.
+
+@login_required(login_url='accounts-login')
 def home(request):
-    return render(request, 'accounts/home.html')
+    """
+    This is the home page of the accounts app. If the user is not logged in, 
+    they will be redirected to the login page. If the user is logged in, they
+    will be redirected to their profile page.
+    """
+    return redirect('accounts-profile', username=request.user.username)
+
+def profile(request, username):
+    """
+    This page will display a user's profile. If the user does not exists, a 404 
+    error will be raised.
+    """
+    try:
+        user = User.objects.get(username=username)
+    except:
+        return Http404("User does not exist")
+
+    return render(request, 'accounts/profile.html', {
+        'user': user
+    })
 
 def registerUser(request):
     form = MyUserCreationForm()
@@ -25,14 +47,15 @@ def registerUser(request):
             user.username = user.username.lower()
             user.email = user.email.lower()
             user.save()
+            messages.success(request, 'Kindly verify your email using a link you just received.')
             return redirect('accounts-home')
-
+    
     return render(request, 'accounts/register.html', {
         'form': form
     })
 
 def loginUser(request):
-    if request.user.is_authenticated:
+    if request.user.is_authenticated == True:
         return redirect('accounts-home')
     
     if request.method == "POST":
