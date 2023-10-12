@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h3>Login!</h3>
+    <hr>
+    Don't have an account? <a href="{% url 'accounts-register' %}">"Register here"</a>.<br>
+    Lost the verification email? <a href="{% url 'request-new-link-from-email' %}">"Resend here"</a>.<br>
+    Forgot password? <a href="{% url 'password_reset' %}">"Reset here"</a>.<br>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="email">Email:</label>
+        <input id="email" name="email" type="email"><br>
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password"><br>
+        <input class="btn btn-warning" type="submit" value="Login">
+    </form>
+{% endblock %}

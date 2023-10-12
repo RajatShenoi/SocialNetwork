@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <h1>Create a new account</h1>
+    <hr>
+    Already have an account? <a href="{% url 'accounts-login' %}">"Log in here"</a>.<br>
+    Lost the verification email? <a href="{% url 'request-new-link-from-email' %}">"Resend here"</a>.<br>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-accent" type="submit" value="Create">
+    </form>
+{% endblock %}

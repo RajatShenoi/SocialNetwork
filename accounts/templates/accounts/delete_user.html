@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <span class="text-error">PLEASE READ THIS</span><br>
+    We're sorry to see that you've decided to go. Pressing "yes" below will delete your account <span class="text-error">permanently</span>, 
+    there will be no way in which the data can be recovered.
+    <h1 class="text-warning">Are you sure you want to delete your account?</h1>
+
+    <label for="password">Password:</label>
+    <input id="password" name="password" type="password"><br>
+
+    <input class="btn btn-error" type="submit" value="Yes" name="yes">
+    <a href="{% url 'accounts-home' %}" class="btn btn-success">No</a>
+</form>
+
+{% endblock content %}

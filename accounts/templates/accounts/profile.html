@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<img src="{{ user.avatar.url }}" alt="{{user.username}}'s avatar" width="200" height="200">
+{{ user.username }}, {{user.first_name}} {{user.last_name}} <br>
+<article class="prose dark:prose-invert">
+    {{ user.bio }}
+</article>
+{% endblock content %}
