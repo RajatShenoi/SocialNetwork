@@ -142,6 +142,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_ID')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PW')
 
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_ID')
+SERVER_EMAIL = os.environ.get('EMAIL_ID')
 
 # Verify Email Settings
 EXPIRE_AFTER = "1d"

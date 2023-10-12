@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 
-from accounts.forms import MyUserCreationForm
+from accounts.forms import MyUserCreationForm, UserUpdateForm
 from accounts.models import User
 
 from verify_email.email_handler import send_verification_email
@@ -32,6 +32,21 @@ def profile(request, username):
 
     return render(request, 'accounts/profile.html', {
         'user': user
+    })
+
+@login_required(login_url='accounts-login')
+def updateProfile(request):
+    user = request.user
+    form = UserUpdateForm(instance=user)
+
+    if request.method == "POST":
+        form = UserUpdateForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts-profile', username=user.username)
+        
+    return render(request, 'accounts/update_profile.html', {
+        'form': form
     })
 
 def registerUser(request):
