@@ -4,6 +4,7 @@
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <input class="btn btn-accent" type="submit" value="Update">
+    <input class="btn btn-accent" type="submit" value="Update"><br>
+    <a href="{% url 'accounts-delete' %}" class="btn btn-error">Delete my account.</a>
 </form>
 {% endblock content %}

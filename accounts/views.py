@@ -49,6 +49,24 @@ def updateProfile(request):
         'form': form
     })
 
+@login_required(login_url='accounts-login')
+def deleteUser(request):
+    user = request.user
+    if request.method == "POST":
+        try:
+            password = request.POST.get('password')
+            authenticated_user = authenticate(request, email=user.email, password=password)
+            if authenticated_user is not None:
+                logout(request)
+                authenticated_user.delete()
+                return redirect('accounts-home')
+            else:
+                messages.error(request, 'An error occured, you may have entered your password wrong.')
+        except:
+            messages.error(request, 'An error occured, you may have entered your password wrong.')
+    
+    return render(request, 'accounts/delete_user.html')
+
 def registerUser(request):
     form = MyUserCreationForm()
 
