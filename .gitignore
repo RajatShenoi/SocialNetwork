@@ -166,5 +166,8 @@ cython_debug/
 # MacOS
 .DS_Store
 
+# node modules
+node_modules/
+
 
 # ------- Added by Rajat Shenoi ---------- #
