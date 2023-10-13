@@ -12,6 +12,8 @@ If you want to suggest a new feature for this application, please [create an iss
 ### Important information to contribute code:
 - If an issue you're trying to solve is not already registered, please [create an issue](https://github.com/RajatShenoi/SocialNetwork/issues/new).
 - Make sure you add a comment to that issue mentioning that you're working on it. This is done to make sure that multiple people do not spend time in fixing / adding the same thing.
+- If you are interested in working on an issue that is already assigned to someone else, you may ping them to reach a solution amongst yourselves, such as collaborating on the same issue / working on it together. Kindly inform us when you do so, so that appropriate credit may be given to everyone involved.
+- We may pass on an already assigned issue to someone else who's interested if the person who's already been assigned is **inactive** / cannot work on it any longer. If you've been assigned and are not able to implement it, please don't hesitate to let us know.
 - Create a **fork** of this repository
 - Create a **new branch** of the format `<issue-id>-<issue-title>`.
   - example: If the issue you're trying to solve has the title, *"fix accounts app"* and has the ID of *"56"*, kindly name your branch as `56-fix-accounts-app`.
