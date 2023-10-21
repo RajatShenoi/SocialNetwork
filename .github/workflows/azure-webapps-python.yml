@@ -64,4 +64,4 @@ jobs:
         with:
           app-name: 'iitmsocialnetwork'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_c6d2cd711fca4dfc95942cc0405b97a3 }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
