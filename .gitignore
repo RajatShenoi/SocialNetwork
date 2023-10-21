@@ -169,5 +169,8 @@ cython_debug/
 # node modules
 node_modules/
 
+# vs code
+.vscode/
+
 
 # ------- Added by Rajat Shenoi ---------- #
