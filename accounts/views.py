@@ -14,16 +14,32 @@ from verify_email.email_handler import send_verification_email
 @login_required(login_url='accounts-login')
 def home(request):
     """
-    This is the home page of the accounts app. If the user is not logged in, 
-    they will be redirected to the login page. If the user is logged in, they
-    will be redirected to their profile page.
+    User Home View
+
+    This view redirects authenticated users to their profile page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: A redirection to the user's profile page.
+
     """
     return redirect('accounts-profile', username=request.user.username)
 
 def profile(request, username):
     """
-    This page will display a user's profile. If the user does not exists, a 404 
-    error will be raised.
+    User Profile View
+
+    This view displays a user's profile based on their username.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        username (str): The username of the user to display.
+
+    Returns:
+        HttpResponse: The user's profile page or a 404 error if the user does not exist.
+
     """
     try:
         user = User.objects.get(username=username)
@@ -36,6 +52,19 @@ def profile(request, username):
 
 @login_required(login_url='accounts-login')
 def updateProfile(request):
+    """
+    User Profile Update View
+
+    This view allows authenticated users to update their profile information.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The user's profile update form.
+        Redirect: A redirection to the user's profile page if the form is valid.
+
+    """
     user = request.user
     form = UserUpdateForm(instance=user)
 
@@ -51,6 +80,19 @@ def updateProfile(request):
 
 @login_required(login_url='accounts-login')
 def deleteUser(request):
+    """
+    User Account Deletion View
+
+    This view allows authenticated users to delete their account.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The user account deletion page.
+        Redirect: A redirection to the accounts home page if the user is deleted.
+
+    """
     user = request.user
     if request.method == "POST":
         try:
@@ -68,6 +110,19 @@ def deleteUser(request):
     return render(request, 'accounts/delete_user.html')
 
 def registerUser(request):
+    """
+    User Registration View
+
+    This view allows users to register by providing their registration details.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The user registration form or a success message on successful registration.
+        Redirect: A redirection to the accounts home page if the form is valid.
+
+    """
     form = MyUserCreationForm()
 
     if request.method == 'POST':
@@ -88,6 +143,18 @@ def registerUser(request):
     })
 
 def loginUser(request):
+    """
+    User Login View
+
+    This view allows users to log in using their email and password.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The login form or a redirection to the user's home page on successful login.
+
+    """
     if request.user.is_authenticated == True:
         return redirect('accounts-home')
     
@@ -113,5 +180,17 @@ def loginUser(request):
         
 
 def logoutUser(request):
+    """
+    User Logout View
+
+    This view allows authenticated users to log out.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        Redirect: A redirection to the user's home page after logout.
+
+    """
     logout(request)
     return redirect('accounts-home')
