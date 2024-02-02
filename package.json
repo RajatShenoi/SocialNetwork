@@ -4,6 +4,6 @@
     "daisyui": "^3.9.4"
   },
   "dependencies": {
-    "caniuse-lite": "^1.0.30001564"
+    "caniuse-lite": "^1.0.30001583"
   }
 }
